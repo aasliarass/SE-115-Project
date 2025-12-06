@@ -55,8 +55,24 @@ public class Main {
         return 1234;
     }
 
-    public static int bestDayOfMonth(int month) { 
-        return 1234; 
+    public static int bestDayOfMonth(int month) {
+        if(month < 0 || month > 11){
+            return -1;
+        }
+        int bestDayProfit = Integer.MIN_VALUE;
+        int bestDay = 0;
+        int totalOfDay = 0;
+        for(int i = 0; i < DAYS; i++){
+            for(int j = 0; j < COMMS; j++){
+                totalOfDay += profit[month][i][j];
+            }
+            if(totalOfDay > bestDayProfit){
+                bestDayProfit = totalOfDay;
+                bestDay = i + 1 ;
+            }
+            totalOfDay = 0;
+        }
+        return bestDay;
     }
     
     public static String bestMonthForCommodity(String comm) { 
