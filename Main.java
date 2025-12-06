@@ -23,8 +23,8 @@ public class Main {
             return "INVALID_MONTH";
         }
         int[] totals = new int[COMMS]; //0-Gold 1-Oil 2-Silver 3-Wheat 4-Copper
-        for(int i = 0; i < profit[month].length; i++){
-            for(int j = 0; j < profit[month][i].length; j++){
+        for(int i = 0; i < DAYS; i++){
+            for(int j = 0; j < COMMS; j++){
                 totals[j] += profit[month][i][j];
             }
         }
@@ -40,7 +40,15 @@ public class Main {
     }
 
     public static int totalProfitOnDay(int month, int day) {
-        return 1234;
+        if(month < 0 || month > 11 || day < 1 || day > 28){
+            return -99999;
+        }
+        int totalProfit = 0;
+        int dayIndex = day - 1;
+        for(int i = 0; i < COMMS; i++){
+            totalProfit += profit[month][dayIndex][i];
+        }
+        return totalProfit;
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
