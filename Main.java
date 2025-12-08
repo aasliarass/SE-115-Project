@@ -87,9 +87,30 @@ public class Main {
         return 1234; 
     }
 
-    public static int biggestDailySwing(int month) { 
-        return 1234; 
+    public static int biggestDailySwing(int month) {
+        if(month < 0 || month > 11) {
+            return -99999;
+        }
+        int maxSwing = Integer.MIN_VALUE;
+        int previousDayTotal = 0;
+        int difference = Integer.MIN_VALUE;
+        for(int i = 0; i < COMMS; i++){
+            previousDayTotal += profit[month][0][i];
+            }
+        for(int m = 1; m < DAYS; m++){
+            int currentDayTotal = 0;
+            for(int n = 0; n < COMMS; n++){
+                currentDayTotal += profit[month][m][n];
+            }
+            difference = Math.abs(previousDayTotal - currentDayTotal);
+            if(difference > maxSwing){
+                maxSwing = difference;
+        }
+            previousDayTotal = currentDayTotal;
+        }
+        return maxSwing;
     }
+
     
     public static String compareTwoCommodities(String c1, String c2) { 
         return "DUMMY is better by 1234"; 
