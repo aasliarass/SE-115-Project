@@ -52,7 +52,26 @@ public class Main {
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
-        return 1234;
+        if (from < 1 || to > 28 || from > to){
+            return -99999;
+        }
+        int commodityIndex = -1;
+        for(int i = 0; i < COMMS; i++){
+            if(commodities[i].equals(commodity)){
+                commodityIndex = i;
+            }
+        }
+        if(commodityIndex == -1){
+            return -99999;
+        }
+        int totalProfit = 0;
+        for(int j = 0; j < MONTHS; j++){
+            for(int k = from; k <= to; k++){
+                totalProfit += profit[j][k-1][commodityIndex];
+            }
+        }
+        return totalProfit;
+
     }
 
     public static int bestDayOfMonth(int month) {
