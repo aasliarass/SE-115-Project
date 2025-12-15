@@ -119,12 +119,29 @@ public class Main {
         return months[bestMonth];
     }
 
-    public static int consecutiveLossDays(String comm) { 
-        return 1234; 
+    public static int consecutiveLossDays(String comm) {
+        return 1234;
     }
     
-    public static int daysAboveThreshold(String comm, int threshold) { 
-        return 1234; 
+    public static int daysAboveThreshold(String comm, int threshold) {
+        int commodityIndex = -1;
+        for(int i = 0; i < COMMS; i++) {
+            if (commodities[i].equals(comm)) {
+                commodityIndex = i;
+            }
+        }
+        if(commodityIndex == -1) {
+            return -1;
+        }
+        int count = 0;
+        for(int m = 0; m < MONTHS; m++){
+            for(int n = 0; n < DAYS; n++){
+                if(profit[m][n][commodityIndex] > threshold){
+                    count += 1;
+                }
+            }
+        }
+        return count;
     }
 
     public static int biggestDailySwing(int month) {
