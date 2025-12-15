@@ -120,7 +120,31 @@ public class Main {
     }
 
     public static int consecutiveLossDays(String comm) {
-        return 1234;
+        int commodityIndex = -1;
+        for(int i = 0; i < COMMS; i++){
+            if(commodities[i].equals(comm)){
+                commodityIndex = i;
+            }
+        }
+        if(commodityIndex == -1) {
+            return -1;
+        }
+        int currentStreakDay = 0;
+        int maxStreakDay = 0;
+        for(int m = 0; m < MONTHS; m++){
+            for(int n = 0; n < DAYS; n++){
+                if(profit[m][n][commodityIndex] < 0){
+                    currentStreakDay += 1;
+                }
+                else{
+                    currentStreakDay = 0;
+                }
+                if(currentStreakDay > maxStreakDay){
+                    maxStreakDay = currentStreakDay;
+                }
+            }
+        }
+        return maxStreakDay;
     }
     
     public static int daysAboveThreshold(String comm, int threshold) {
