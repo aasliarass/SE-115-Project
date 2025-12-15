@@ -23,17 +23,17 @@ public class Main {
             return "INVALID_MONTH";
         }
         int[] totals = new int[COMMS]; //0-Gold 1-Oil 2-Silver 3-Wheat 4-Copper
-        for(int i = 0; i < DAYS; i++){
-            for(int j = 0; j < COMMS; j++){
-                totals[j] += profit[month][i][j];
+        for(int d = 0; d < DAYS; d++){
+            for(int c = 0; c < COMMS; c++){
+                totals[c] += profit[month][d][c];
             }
         }
         int mostProfit = Integer.MIN_VALUE;
         int mostProfitableCommodity = 0;
-        for(int i = 0; i < totals.length; i++){
-            if(totals[i] > mostProfit) {
-                mostProfit = totals[i];
-                mostProfitableCommodity = i;
+        for(int p = 0; p < totals.length; p++){
+            if(totals[p] > mostProfit) {
+                mostProfit = totals[p];
+                mostProfitableCommodity = p;
             }
         }
         return commodities[mostProfitableCommodity] + " " +mostProfit;
@@ -45,8 +45,8 @@ public class Main {
         }
         int totalProfit = 0;
         int dayIndex = day - 1;
-        for(int i = 0; i < COMMS; i++){
-            totalProfit += profit[month][dayIndex][i];
+        for(int c = 0; c < COMMS; c++){
+            totalProfit += profit[month][dayIndex][c];
         }
         return totalProfit;
     }
@@ -56,18 +56,18 @@ public class Main {
             return -99999;
         }
         int commodityIndex = -1;
-        for(int i = 0; i < COMMS; i++){
-            if(commodities[i].equals(commodity)){
-                commodityIndex = i;
+        for(int c = 0; c < COMMS; c++){
+            if(commodities[c].equals(commodity)){
+                commodityIndex = c;
             }
         }
         if(commodityIndex == -1){
             return -99999;
         }
         int totalProfit = 0;
-        for(int j = 0; j < MONTHS; j++){
-            for(int k = from; k <= to; k++){
-                totalProfit += profit[j][k-1][commodityIndex];
+        for(int m = 0; m < MONTHS; m++){
+            for(int d = from; d <= to; d++){
+                totalProfit += profit[m][d-1][commodityIndex];
             }
         }
         return totalProfit;
@@ -81,13 +81,13 @@ public class Main {
         int bestDayProfit = Integer.MIN_VALUE;
         int bestDay = 0;
         int totalOfDay = 0;
-        for(int i = 0; i < DAYS; i++){
-            for(int j = 0; j < COMMS; j++){
-                totalOfDay += profit[month][i][j];
+        for(int d = 0; d < DAYS; d++){
+            for(int c = 0; c < COMMS; c++){
+                totalOfDay += profit[month][d][c];
             }
             if(totalOfDay > bestDayProfit){
                 bestDayProfit = totalOfDay;
-                bestDay = i + 1 ;
+                bestDay = d + 1 ;
             }
             totalOfDay = 0;
         }
@@ -96,9 +96,9 @@ public class Main {
     
     public static String bestMonthForCommodity(String comm) {
         int commodityIndex = -1;
-        for(int i = 0; i < COMMS; i++){
-            if(commodities[i].equals(comm)){
-                commodityIndex = i;
+        for(int c = 0; c < COMMS; c++){
+            if(commodities[c].equals(comm)){
+                commodityIndex = c;
             }
         }
         if(commodityIndex == -1){
@@ -108,8 +108,8 @@ public class Main {
         int bestMonth = 0;
         for(int m = 0; m < MONTHS; m++){
             int totalProfit = 0;
-            for(int n = 0; n < DAYS; n++){
-                totalProfit += profit[m][n][commodityIndex];
+            for(int d = 0; d < DAYS; d++){
+                totalProfit += profit[m][d][commodityIndex];
             }
             if(totalProfit > bestMonthProfit){
                 bestMonthProfit = totalProfit;
@@ -121,9 +121,9 @@ public class Main {
 
     public static int consecutiveLossDays(String comm) {
         int commodityIndex = -1;
-        for(int i = 0; i < COMMS; i++){
-            if(commodities[i].equals(comm)){
-                commodityIndex = i;
+        for(int c = 0; c < COMMS; c++){
+            if(commodities[c].equals(comm)){
+                commodityIndex = c;
             }
         }
         if(commodityIndex == -1) {
@@ -132,8 +132,8 @@ public class Main {
         int currentStreakDay = 0;
         int maxStreakDay = 0;
         for(int m = 0; m < MONTHS; m++){
-            for(int n = 0; n < DAYS; n++){
-                if(profit[m][n][commodityIndex] < 0){
+            for(int d = 0; d < DAYS; d++){
+                if(profit[m][d][commodityIndex] < 0){
                     currentStreakDay += 1;
                 }
                 else{
@@ -149,9 +149,9 @@ public class Main {
     
     public static int daysAboveThreshold(String comm, int threshold) {
         int commodityIndex = -1;
-        for(int i = 0; i < COMMS; i++) {
-            if (commodities[i].equals(comm)) {
-                commodityIndex = i;
+        for(int c = 0; c < COMMS; c++) {
+            if (commodities[c].equals(comm)) {
+                commodityIndex = c;
             }
         }
         if(commodityIndex == -1) {
@@ -159,8 +159,8 @@ public class Main {
         }
         int count = 0;
         for(int m = 0; m < MONTHS; m++){
-            for(int n = 0; n < DAYS; n++){
-                if(profit[m][n][commodityIndex] > threshold){
+            for(int d = 0; d < DAYS; d++){
+                if(profit[m][d][commodityIndex] > threshold){
                     count += 1;
                 }
             }
@@ -175,13 +175,13 @@ public class Main {
         int maxSwing = Integer.MIN_VALUE;
         int previousDayTotal = 0;
         int difference = Integer.MIN_VALUE;
-        for(int i = 0; i < COMMS; i++){
-            previousDayTotal += profit[month][0][i];
+        for(int c = 0; c < COMMS; c++){
+            previousDayTotal += profit[month][0][c];
             }
-        for(int m = 1; m < DAYS; m++){
+        for(int d = 1; d < DAYS; d++){
             int currentDayTotal = 0;
-            for(int n = 0; n < COMMS; n++){
-                currentDayTotal += profit[month][m][n];
+            for(int c = 0; c < COMMS; c++){
+                currentDayTotal += profit[month][d][c];
             }
             difference = Math.abs(previousDayTotal - currentDayTotal);
             if(difference > maxSwing){
