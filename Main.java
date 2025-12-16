@@ -193,8 +193,40 @@ public class Main {
     }
 
     
-    public static String compareTwoCommodities(String c1, String c2) { 
-        return "DUMMY is better by 1234"; 
+    public static String compareTwoCommodities(String c1, String c2) {
+        int index1 = -1;
+        int index2 = -1;
+        for(int c = 0; c < COMMS; c++) {
+            if (commodities[c].equals(c1)) {
+                index1 = c;
+            }
+            if (commodities[c].equals(c2)) {
+                index2 = c;
+            }
+        }
+        if(index1 == -1 || index2 == -1){
+            return "INVALID_COMMODITY";
+        }
+        int total1 = 0;
+        int total2 = 0;
+        int difference = 0;
+        for(int m = 0; m < MONTHS; m++){
+            for(int d = 0; d < DAYS; d++){
+                total1 += profit[m][d][index1];
+                total2 += profit[m][d][index2];
+            }
+        }
+        if(total1 > total2){
+            difference = total1 - total2;
+            return commodities[index1] + " is better by " + difference;
+        }
+        else if(total2 > total1){
+            difference = total2 - total1;
+            return commodities[index2] + " is better by " +difference;
+        }
+        else{
+            return "Equal";
+        }
     }
     
     public static String bestWeekOfMonth(int month) {
