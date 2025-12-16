@@ -197,8 +197,25 @@ public class Main {
         return "DUMMY is better by 1234"; 
     }
     
-    public static String bestWeekOfMonth(int month) { 
-        return "DUMMY"; 
+    public static String bestWeekOfMonth(int month) {
+        if (month < 0 || month > 11) {
+            return "INVALID_MONTH";
+        }
+        int bestWeekProfit = Integer.MIN_VALUE;
+        int bestWeek = -1;
+        for(int w = 1; w < 5; w++){
+            int weekTotal = 0;
+            for(int start = (w - 1) * 7 + 1; start <= w * 7; start++){
+               for(int c = 0; c < COMMS; c++){
+                   weekTotal += profit[month][start - 1][c];
+               }
+            }
+            if(weekTotal > bestWeekProfit){
+               bestWeekProfit = weekTotal;
+               bestWeek = w;
+            }
+        }
+        return "Week " + bestWeek;
     }
 
     public static void main(String[] args) {
