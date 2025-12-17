@@ -1,6 +1,7 @@
 // Main.java — Students version
 import java.io.*;
 import java.util.*;
+import java.nio.file.Paths;
 
 public class Main {
     static final int MONTHS = 12;
@@ -13,6 +14,20 @@ public class Main {
 
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
+
+        profit = new int[MONTHS][DAYS][COMMS];
+
+        for(int m = 0; m < MONTHS; m++){
+            String filePath = "Data_Files/" + months[m];
+
+            try{
+            }
+            catch(Exception e){
+
+            }
+        }
+
+
 
     }
 
