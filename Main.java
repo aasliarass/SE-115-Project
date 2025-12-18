@@ -18,17 +18,34 @@ public class Main {
         profit = new int[MONTHS][DAYS][COMMS];
 
         for(int m = 0; m < MONTHS; m++){
-            String filePath = "Data_Files/" + months[m];
+            String filePath = "Data_Files/" + months[m] + ".txt";
 
             try{
-            }
-            catch(Exception e){
+                Scanner reader = new Scanner(Paths.get(filePath));
+                if(reader.hasNextLine()) reader.nextLine();
 
+                while(reader.hasNextLine()){
+                    String line = reader.nextLine();
+                    String[] piece = line.split(",");
+
+                    int dayIndex = Integer.parseInt(piece[0]) - 1;
+
+                    int commodityIndex = -1;
+                    for(int c = 0; c < COMMS; c++){
+                        if(commodities[c].equals(piece[1])){
+                            commodityIndex = c;
+                            break;
+                        }
+                    }
+
+                    int profitValue = Integer.parseInt(piece[2]);
+
+                    profit[m][dayIndex][commodityIndex] = profitValue;
+                }
+                reader.close();
+            }catch(Exception e){
             }
         }
-
-
-
     }
 
     // ======== 10 REQUIRED METHODS (Students fill these) ========
