@@ -161,9 +161,9 @@ public class Main {
         if(commodityIndex == -1) {
             return -1;
         }
-        int currentStreakDay = 0;
         int maxStreakDay = 0;
         for(int m = 0; m < MONTHS; m++){
+            int currentStreakDay = 0;
             for(int d = 0; d < DAYS; d++){
                 if(profit[m][d][commodityIndex] < 0){
                     currentStreakDay += 1;
