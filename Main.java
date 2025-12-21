@@ -205,9 +205,9 @@ public class Main {
         if(month < 0 || month > 11) {
             return -99999;
         }
-        int maxSwing = Integer.MIN_VALUE;
+        int maxSwing = 0;
         int previousDayTotal = 0;
-        int difference = Integer.MIN_VALUE;
+        int difference = 0;
         for(int c = 0; c < COMMS; c++){
             previousDayTotal += profit[month][0][c];
             }
