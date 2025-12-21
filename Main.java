@@ -156,6 +156,7 @@ public class Main {
         for(int c = 0; c < COMMS; c++){
             if(commodities[c].equals(comm)){
                 commodityIndex = c;
+                break;
             }
         }
         if(commodityIndex == -1) {
